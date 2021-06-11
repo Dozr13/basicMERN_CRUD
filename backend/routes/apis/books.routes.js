@@ -55,7 +55,7 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   Book.findByIdAndDelete(req.params.id, req.body)
     .then((book) =>
-      res.json({ msg: "Book entry has successfully been deleted" })
+      res.json({ msg: `Book entry ${book} has successfully been deleted` })
     )
     .catch((err) =>
       res.status(404).json({ error: "Unable to delete this book" })

@@ -6,7 +6,7 @@ export const BookContext = createContext(null);
 
 export const BookProvider = (props) => {
   const [books, setBooks] = useState([]);
-  const [singleBook, setSingleBook] = useState([]);
+  const [singleBook, setSingleBook] = useState({});
 
   const { push } = useHistory();
 
@@ -47,13 +47,14 @@ export const BookProvider = (props) => {
   };
 
   // Read Book in DB by id
-  const readSingleBookInfo = (book_id) => {
+  const readSingleBookInfo = (id) => {
+    console.log(singleBook);
     axios
-      .get(`http://localhost:5000/api/books/${book_id}`)
+      .get(`http://localhost:5000/api/books/${id}`)
       .then((res) => {
         setSingleBook(res.data);
       })
-      .catch((err) => console.log("Error in Context.readBookInfo", err));
+      .catch((err) => console.log("Error in Context.readSingleBookInfo", err));
   };
 
   // Update Book Information
@@ -67,10 +68,11 @@ export const BookProvider = (props) => {
   };
 
   // Delete a book from DB
-  const deleteBook = (book_id) => {
+  const deleteBook = (id) => {
     axios
-      .delete(`http://localhost:5000/api/${book_id}`)
+      .delete(`http://localhost:5000/api/books/${id}`)
       .then((res) => {
+        console.log(id);
         push("/");
       })
       .catch((err) => console.log("Error in Context.deleteBook", err));

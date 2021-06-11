@@ -1,26 +1,30 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../App.css";
 import { Link } from "react-router-dom";
 import BookCard from "./BookCard";
 import { BookContext } from "../context/BookContext";
 
 const ViewBookList = (props) => {
-  const [booksShown, setBooksShown] = useState([]);
-
   const bookCtx = useContext(BookContext);
 
+  const [bookShown, setBookShown] = useState([]);
+
   useEffect(() => {
-    bookCtx.readBookList();
-    setBooksShown(bookCtx.books.data);
+    bookCtx.readBookList(bookShown.id);
+    console.log(bookShown);
   }, []);
 
-  // console.log("PrintBook: " + booksShown);
+  useEffect(() => {
+    setBookShown(bookCtx.books.data);
+  }, [bookCtx.books]);
+
+  // console.log("PrintBook: " + bookShown);
   let bookList;
 
-  if (!booksShown) {
+  if (!bookShown) {
     bookList = "there is no book record!";
   } else {
-    bookList = booksShown.map((book, k) => <BookCard book={book} key={k} />);
+    bookList = bookShown.map((book, k) => <BookCard book={book} key={k} />);
   }
 
   return (
