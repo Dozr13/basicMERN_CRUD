@@ -22,7 +22,7 @@ class ViewBookDetails extends Component {
         });
       })
       .catch((err) => {
-        console.log("Error from ShowBookDetails");
+        console.log("Error from ViewBookDetails");
       });
   }
 

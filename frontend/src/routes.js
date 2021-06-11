@@ -13,7 +13,7 @@ export default (
       <Route path='/create-book' component={CreateBook} />
 
       <Route path='/edit-book/:id' component={UpdateBookInfo} />
-      <Route path='/show-book' component={ViewBookDetails} />
+      <Route path='/show-book/:id' component={ViewBookDetails} />
     </Switch>
   </HashRouter>
 );
