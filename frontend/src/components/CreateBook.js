@@ -12,18 +12,18 @@ const CreateBook = () => {
   const [published_date, setPublished_date] = useState("");
   const [publisher, setPublisher] = useState("");
 
-  const BookCtx = useContext(BookContext);
+  const bookCtx = useContext(BookContext);
 
-  const onSubmit = (e, data) => {
+  const createBookOnSubmit = (e) => {
     e.preventDefault();
-    console.log("Page", data.title);
-    BookCtx.createBook(
-      data.title,
-      data.isbn,
-      data.author,
-      data.description,
-      data.published_date,
-      data.publisher
+    console.log("Page", title);
+    bookCtx.createBook(
+      title,
+      isbn,
+      author,
+      description,
+      published_date,
+      publisher
     );
     setTitle("");
     setIsbn("");
@@ -62,7 +62,7 @@ const CreateBook = () => {
           <div className='col-md-8 m-auto'>
             <h4 className='display-4 text-center'>Add Book</h4>
             <p className='lead text-center'>Create New Book</p>
-            <form noValidate onSubmit={onSubmit}>
+            <form noValidate onSubmit={createBookOnSubmit}>
               <div className='form-group'>
                 <input
                   type='text'

@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-
 import axios from "axios";
 
 export const BookContext = createContext(null);
@@ -9,25 +8,25 @@ export const BookProvider = (props) => {
   const [books, setBooks] = useState([]);
   const [singleBook, setSingleBook] = useState([]);
 
-  const push = useHistory();
+  const { push } = useHistory();
 
   // Create a new book in DB
   const createBook = (
-    book_title,
-    book_isbn,
-    book_author,
-    book_description,
-    book_published_date,
-    book_publisher
+    title,
+    isbn,
+    author,
+    description,
+    published_date,
+    publisher
   ) => {
     axios
       .post("http://localhost:5000/api/books", {
-        book_title,
-        book_isbn,
-        book_author,
-        book_description,
-        book_published_date,
-        book_publisher,
+        title,
+        isbn,
+        author,
+        description,
+        published_date,
+        publisher,
       })
       .then(({ data }) => {
         console.log(data);
@@ -42,9 +41,9 @@ export const BookProvider = (props) => {
     axios
       .get("http://localhost:5000/api/books")
       .then((res) => {
-        setBooks(res.data);
+        setBooks(res);
       })
-      .catch((err) => console.log("Error in Context.readBookList"));
+      .catch((err) => console.log("Error in Context.readBookList", err));
   };
 
   // Read Book in DB by id
@@ -54,7 +53,7 @@ export const BookProvider = (props) => {
       .then((res) => {
         setSingleBook(res.data);
       })
-      .catch((err) => console.log("Error in Context.readBookInfo"));
+      .catch((err) => console.log("Error in Context.readBookInfo", err));
   };
 
   // Update Book Information
@@ -64,17 +63,17 @@ export const BookProvider = (props) => {
       .then(({ data }) => {
         setSingleBook(...books, data);
       })
-      .catch((err) => console.log("Error in Context.updateBook"));
+      .catch((err) => console.log("Error in Context.updateBook", err));
   };
 
   // Delete a book from DB
   const deleteBook = (book_id) => {
     axios
-      .delete(`http://localhost:500/api/${book_id}`)
+      .delete(`http://localhost:5000/api/${book_id}`)
       .then((res) => {
         push("/");
       })
-      .catch((err) => console.log("Error in Context.deleteBook"));
+      .catch((err) => console.log("Error in Context.deleteBook", err));
   };
 
   return (
