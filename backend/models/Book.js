@@ -1,31 +1,31 @@
 const mongoose = require("mongoose");
 
 const BookSchema = new mongoose.Schema({
-  title: {
+  book_title: {
     type: String,
     required: true,
   },
-  isbn: {
+  book_isbn: {
     type: String,
     required: true,
   },
-  author: {
+  book_author: {
     type: String,
     required: true,
   },
-  description: {
+  book_description: {
     type: String,
     required: false,
   },
-  published_date: {
+  book_published_date: {
     type: Date,
     required: false,
   },
-  publisher: {
+  book_publisher: {
     type: String,
     required: false,
   },
-  updated_date: {
+  book_updated_date: {
     type: Date,
     default: Date.now,
   },

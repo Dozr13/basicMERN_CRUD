@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-// Loads teh books model
+// Loads the books model
 const Book = require("../../models/Book");
 
 // GET route api/books/test
@@ -14,6 +14,16 @@ router.get("/", (req, res) => {
   Book.find()
     .then((books) => res.json(books))
     .catch((err) => res.status(400).json({ noBooksFound: "No Books Found" }));
+});
+
+// GET id at api/books/:id to view single book
+// Public access
+router.get("/:id", (req, res) => {
+  Book.findById(req.params.id)
+    .then((book) => res.json(book))
+    .catch((err) =>
+      res.status(404).json({ noBookFound: "No Book found matching that id" })
+    );
 });
 
 // POST id at api/books/:id to add and save a book
