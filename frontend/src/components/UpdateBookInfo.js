@@ -9,14 +9,14 @@ const UpdateBookInfo = (props) => {
 
   const selectedBook = bookCtx.singleBook;
 
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [description, setDescription] = useState("");
-  const [publisher, setPublisher] = useState("");
-  const [published_date, setPublished_date] = useState("");
-  const [isbn, setIsbn] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [author, setAuthor] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [publisher, setPublisher] = useState("");
+  // const [published_date, setPublished_date] = useState("");
+  // const [isbn, setIsbn] = useState("");
 
-  // const [values, setValues] = useState({
+  // const [bookValues, setBookValues] = useState({
   //   title: "",
   //   isbn: "",
   //   author: "",
@@ -26,37 +26,38 @@ const UpdateBookInfo = (props) => {
   // });
 
   useEffect(() => {
+    console.log(id);
     bookCtx.readSingleBookInfo(id);
   }, []);
 
-  useEffect(() => {
-    console.log(bookCtx.singleBook);
-    setTitle(title);
-    setAuthor(author);
-    setDescription(description);
-    setPublisher(publisher);
-    setPublished_date(published_date);
-    setIsbn(isbn);
-  }, []);
+  // useEffect(() => {
+  //   console.log(bookCtx.singleBook);
+  //   setTitle(title);
+  //   setAuthor(author);
+  //   setDescription(description);
+  //   setPublisher(publisher);
+  //   setPublished_date(published_date);
+  //   setIsbn(isbn);
+  // }, []);
 
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
 
-  //   setValues((prevVal) => ({
-  //     ...prevVal,
-  //     [name]: value,
-  //   }));
-  // };
+    setBookValues({
+      [name]: value,
+    });
+  };
 
   const onSubmit = (e) => {
+    e.preventDefault();
     bookCtx.updateBook(
-      title,
-      author,
-      description,
-      publisher,
-      published_date,
-      isbn,
-      bookCtx.singleBook.id
+      bookValues.title,
+      bookValues.author,
+      bookValues.description,
+      bookValues.publisher,
+      bookValues.published_date,
+      bookValues.isbn,
+      bookValues.bookCtx.singleBook.id
     );
   };
 
@@ -84,8 +85,8 @@ const UpdateBookInfo = (props) => {
                 type='text'
                 placeholder={selectedBook.title || "Title"}
                 name='title'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={bookValues.title}
+                onChange={handleInputChange}
                 className='form-control'
               />
             </div>
@@ -97,8 +98,8 @@ const UpdateBookInfo = (props) => {
                 type='text'
                 placeholder={selectedBook.author || "Author"}
                 name='author'
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
+                value={bookValues.author}
+                onChange={handleInputChange}
                 className='form-control'
               />
             </div>
@@ -109,8 +110,8 @@ const UpdateBookInfo = (props) => {
                 type='text'
                 placeholder={selectedBook.description || "Description"}
                 name='description'
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={bookValues.description}
+                onChange={handleInputChange}
                 className='form-control'
               />
             </div>
@@ -121,8 +122,8 @@ const UpdateBookInfo = (props) => {
                 type='text'
                 placeholder={selectedBook.publisher || "Publisher"}
                 name='publisher'
-                value={publisher}
-                onChange={(e) => setPublisher(e.target.value)}
+                value={bookValues.publisher}
+                onChange={handleInputChange}
                 className='form-control'
               />
             </div>
@@ -133,8 +134,8 @@ const UpdateBookInfo = (props) => {
                 type='date'
                 placeholder={selectedBook.published_date || "Published Date"}
                 name='published_date'
-                value={published_date}
-                onChange={(e) => setPublished_date(e.target.value)}
+                value={bookValues.published_date}
+                onChange={handleInputChange}
                 className='form-control'
               />
             </div>
@@ -145,8 +146,8 @@ const UpdateBookInfo = (props) => {
                 type='text'
                 placeholder={selectedBook.isbn || "ISBN"}
                 name='isbn'
-                value={isbn}
-                onChange={(e) => setIsbn(e.target.value)}
+                value={bookValues.isbn}
+                onChange={handleInputChange}
                 className='form-control'
               />
             </div>
