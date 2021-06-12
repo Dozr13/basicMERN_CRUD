@@ -16,7 +16,7 @@ const CreateBook = () => {
 
   const createBookOnSubmit = (e) => {
     e.preventDefault();
-    console.log("Page", title);
+
     bookCtx.createBook(
       title,
       isbn,
@@ -25,29 +25,7 @@ const CreateBook = () => {
       published_date,
       publisher
     );
-    setTitle("");
-    setIsbn("");
-    setAuthor("");
-    setDescription("");
-    setPublished_date("");
-    setPublisher("");
   };
-  // const onChange = (e) => {
-  //   setTitle({ [e.target.name]: e.target.value });
-  // };
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const data = {
-  //     setTitle: title,
-  //     setIsbn: isbn,
-  //     setAuthor: author,
-  //     setDescription: description,
-  //     setPublished_date: published_date,
-  //     setPublisher: publisher,
-  //   };
-  // };
 
   return (
     <div className='CreateBook'>

@@ -48,7 +48,6 @@ export const BookProvider = (props) => {
 
   // Read Book in DB by id
   const readSingleBookInfo = (id) => {
-    console.log(singleBook);
     axios
       .get(`http://localhost:5000/api/books/${id}`)
       .then((res) => {
@@ -58,12 +57,15 @@ export const BookProvider = (props) => {
   };
 
   // Update Book Information
-  const updateBook = (book_id) => {
+  const updateBook = (id, data) => {
     axios
-      .put(`http://localhost:5000/api/${book_id}`)
-      .then(({ data }) => {
-        setSingleBook(...books, data);
+      .put(`http://localhost:5000/api/books/${id}`, data)
+      .then((res) => {
+        push(`/show-book/${id}`);
       })
+      // .then(({ data }) => {
+      //   setSingleBook(...books, data);
+      // })
       .catch((err) => console.log("Error in Context.updateBook", err));
   };
 

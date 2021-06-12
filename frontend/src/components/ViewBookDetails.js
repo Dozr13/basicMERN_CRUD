@@ -7,7 +7,7 @@ const ViewBookDetails = (props) => {
   const bookCtx = useContext(BookContext);
   const id = props.match.params.id;
 
-  const [book, setBook] = useState({});
+  const [book, setBook] = useState(bookCtx.singleBook);
 
   useEffect(() => {
     console.log(id);
@@ -17,6 +17,8 @@ const ViewBookDetails = (props) => {
   useEffect(() => {
     setBook(bookCtx.singleBook);
   }, [bookCtx.singleBook]);
+
+  // console.log(book);
 
   const onDeleteClick = (id) => {
     bookCtx.deleteBook(id);

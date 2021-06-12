@@ -11,7 +11,6 @@ const ViewBookList = (props) => {
 
   useEffect(() => {
     bookCtx.readBookList(bookShown.id);
-    console.log(bookShown);
   }, []);
 
   useEffect(() => {

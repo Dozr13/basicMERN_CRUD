@@ -44,9 +44,9 @@ router.get("/:id", (req, res) => {
 // Public access
 router.put("/:id", (req, res) => {
   Book.findByIdAndUpdate(req.params.id, req.body)
-    .then((book) => res.json({ msg: "Updated book successfully!" }))
+    .then((book) => res.json({ msg: `Updated ${book.title}  successfully!` }))
     .catch((err) =>
-      res.status(400).json({ error: "Unable to update this book" })
+      res.status(400).json({ error: "Unable to update this book", err })
     );
 });
 
