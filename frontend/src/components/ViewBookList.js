@@ -17,7 +17,6 @@ const ViewBookList = (props) => {
     setBookShown(bookCtx.books.data);
   }, [bookCtx.books]);
 
-  // console.log("PrintBook: " + bookShown);
   let bookList;
 
   if (!bookShown) {
